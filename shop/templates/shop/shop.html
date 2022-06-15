@@ -1,0 +1,74 @@
+{% extends 'shop/layout.html' %}
+{% load static %}
+
+{% block title %}Главная{% endblock %}
+
+
+{% block active1 %}
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #181818">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'shop' %}"><i class="bi bi-shop ms-4" style="font-size: 48px; color: #ffffff"></i></a>
+    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon "></span>
+    </button>
+    <div id="navbarNavDropdown" class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-danger text-uppercase fw-bold fs-5 px-4" aria-current="page" href="{% url 'shop' %}">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light text-uppercase fw-bold fs-5 px-4" href="{% url 'rec' %}">Рекомендуемые</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link text-light text-uppercase fw-bold fs-5 px-4 dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Цены
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'atelier' %}">Студии</a></li>
+            <li><a class="dropdown-item" href="{% url '1flat' %}">1-ые квартиры</a></li>
+            <li><a class="dropdown-item" href="{% url '2flat' %}">2-ые квартиры</a></li>
+            <li><a class="dropdown-item" href="{% url '3flat' %}">3-ые квартиры</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+
+{% block content %}
+
+<img width="100%" src="{% static 'shop/img/sale1.png' %}">
+
+<div class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-10 mx-auto my-2 text-center">
+        <h1 class="font-weight-bold text-light">
+          Наша продукция
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+      {% for el in posts %}
+          <div class="col-9 mx-auto col-md-6 col-lg-3">
+            <div class="card mb-5" style="width: 18rem">
+              <a class="text-body" href="{% url el.event_text %}" style="text-decoration: none">
+              <img src="{{ el.event_image.url }}" width="300" height="250"  class="card-img-top">
+              <div class="card-body">
+                <h4 class="font-weight-bold text-center">
+                  {{ el.text_title }}
+                </h4>
+              </div>
+              </a>
+            </div>
+          </div>
+      {% endfor %}
+  </div>
+</div>
+{% endblock %}
